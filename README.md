@@ -11,12 +11,11 @@
 | family_name        | string   | null: false               |
 | first_name_kana    | string   | null: false               |
 | family_name_kana   | string   | null: false               |
-| birthday           | datetime	| null: false               |
+| birthday           | date   	| null: false               |
 
 ### Association
 
 - has_many :items
-- has_many :shippings
 - has_many :purchases
 
 
@@ -38,8 +37,7 @@
 ### Association
 
 - belongs_to :user
-- has_one :shippings
-- has_one :purchases
+- has_one :purchase
 
 ### 備考
 - Column:user、Type:referencesとするとuserテーブルからuser.idをとってきてくれる
