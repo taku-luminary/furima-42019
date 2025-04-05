@@ -83,9 +83,12 @@ RSpec.describe Item, type: :model do
         @item.price = '１０００'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price 価格は半角かつ¥300から¥9,999,999の間で入力して下さい')
+      end
 
-        # 全角だと出品できないエラーと価格範囲指定のエラーコードをマージしている理由
-        # FactoryBotで生成された @item オブジェクトの price が意図せず数値の 0 で初期化されていたため、テスト内で全角数字 '１０００' を代入する前に数値型になっており、format バリデーションよりも先に numericality バリデーションが働き、期待される「半角数値で入力してください」のエラーメッセージではなく、数値範囲のエラーメッセージが表示されてしまうため
+      it 'userが紐づいていないと出品できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include 'User must exist'
       end
     end
   end
