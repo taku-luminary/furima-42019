@@ -11,6 +11,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_cost
   belongs_to :prefecture
   belongs_to :days_to_ship
+  has_one    :purchase
 
   with_options numericality: { other_than: 1, message: 'は選択してください' } do
     validates :category_id

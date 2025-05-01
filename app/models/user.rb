@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   # Associations
   has_many :items
+  has_many :purchases
   # has_many :purchases
 
   # Validations
