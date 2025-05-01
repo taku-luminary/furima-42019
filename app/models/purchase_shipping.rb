@@ -9,6 +9,8 @@ class PurchaseShipping
     validates :street_address
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'はハイフンなしの10〜11桁の半角数字で入力してください' }
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
   def save

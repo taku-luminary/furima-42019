@@ -3,12 +3,10 @@ class PurchasesController < ApplicationController
   before_action :move_to_index
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-    @item = Item.find(params[:item_id])
     @purchase_shipping = PurchaseShipping.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @purchase_shipping = PurchaseShipping.new(purchase_params)
     if @purchase_shipping.valid?
       pay_item
@@ -22,8 +20,11 @@ class PurchasesController < ApplicationController
 
   private
 
-  def move_to_index
+  def set_item
     @item = Item.find(params[:item_id])
+  end
+
+  def move_to_index
     return unless current_user.id == @item.user_id || @item.purchase.present?
 
     redirect_to root_path
